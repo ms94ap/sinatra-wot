@@ -10,31 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160716115157) do
+ActiveRecord::Schema.define(version: 20160716114454) do
 
-  create_table "tank", force: :cascade do |t|
-    t.string "name"
-    t.string "nation"
-  end
-
-  create_table "tank_type", force: :cascade do |t|
-    t.integer "tank_id"
-    t.integer "type_id"
-  end
-
-  create_table "type", force: :cascade do |t|
+  create_table "tank_types", force: :cascade do |t|
     t.string "name"
   end
 
-  create_table "user", force: :cascade do |t|
+  create_table "tanks", force: :cascade do |t|
+    t.integer "user_id"
+    t.string  "name"
+    t.string  "nation"
+    t.integer "tank_type_id"
+  end
+
+  create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "password"
     t.string "email"
-  end
-
-  create_table "user_tank", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "tank_id"
   end
 
 end
