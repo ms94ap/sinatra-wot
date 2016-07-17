@@ -4,7 +4,7 @@ get '/signup' do
   if !logged_in?
     erb :'users/signup'
   else
-    redirect to '/welcome'
+    erb :'/users/signup'
   end
 end
 
@@ -22,7 +22,7 @@ get '/login' do
   if !logged_in?
     erb :'/users/login'
   else
-    redirect to '/welcome'
+    erb :'/users/welcome'
   end
 end
 
@@ -30,7 +30,7 @@ end
   @user = User.find_by(username: params["username"])
   if @user && @user.authenticate(params["password"])
     session[:user_id] = @user.id
-    redirect to '/users/welcome'
+    erb :'/users/welcome'
   else
     flash[:message] = "Wrong username and/or password"
     redirect to '/'
@@ -38,16 +38,6 @@ end
 end
 
 
-
-helpers do
-def logged_in?
-  !!session[:user_id]
-end
-
-def current_user
-  User.find(session[:user_id])
-end
-end
 
 
 end
