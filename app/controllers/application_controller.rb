@@ -1,8 +1,10 @@
 require './config/environment'
 require "./app/models/user"
+require 'rack-flash'
 
 
 class ApplicationController < Sinatra::Base
+use Rack::Flash
 
   configure do
    set :public_folder, 'public'
@@ -12,26 +14,6 @@ class ApplicationController < Sinatra::Base
  end
 
  get '/' do
-    erb :main
-  end
-
-  get '/signup' do
-    if logged_in?
-      redirect to "/users"
-    else
-      erb :main
-    end
-  end
-
-  helpers do
-  def logged_in?
-    !!session[:user_id]
-  end
-
-  def current_user
-    User.find(session[:user_id])
-  end
-end
-
-
+  erb :main
+ end
 end
