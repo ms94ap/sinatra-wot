@@ -1,2 +1,9 @@
 <h1>Welcome </h1>
 Current User: <%= current_user.username %>
+  <% current_user.tanks.each do |tank| %>
+  <p><%=tank.name%></p>
+  <%end%>
+
+  <h1><a href="#">Create a new tank</a>
+
+<p> <a href="/logout">Logout:</a></p>
