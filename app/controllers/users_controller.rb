@@ -4,7 +4,7 @@ class UsersController < ApplicationController
     if !logged_in?
       erb :'users/signup'
     else
-      erb :'/users/signup'
+      redirect to '/tanks'
     end
   end
 
@@ -15,7 +15,7 @@ class UsersController < ApplicationController
       @user = User.new(username: params["username"], email: params["email"], password: params["password"])
       @user.save
       session[:user_id] = @user.id
-     erb :'/users/welcome'
+     redirect to '/tanks'
     end
   end
 
@@ -23,7 +23,7 @@ class UsersController < ApplicationController
     if !logged_in?
       erb :'/users/login'
     else
-      erb :'/users/welcome'
+      redirect to '/tanks'
     end
   end
 
@@ -31,7 +31,7 @@ class UsersController < ApplicationController
     @user = User.find_by(username: params["username"])
     if @user && @user.authenticate(params["password"])
       session[:user_id] = @user.id
-      erb :'/users/welcome'
+      redirect to '/tanks'
     else
       flash[:message] = "Wrong username and/or password"
       erb :'/users/login'

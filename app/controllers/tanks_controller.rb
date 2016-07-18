@@ -1,7 +1,10 @@
 class TanksController < ApplicationController
 
-  get '/tanks'
-  erb :index
+  get '/tanks' do
+    @tanks = current_user.tanks
+    erb :'/tanks/index'
+  end
+
 
 
   get '/tanks/new' do
@@ -9,8 +12,13 @@ class TanksController < ApplicationController
   end
 
   post '/tanks' do
-    @tank = Tank.create(name: params["tank"]["name"], nation: params["tank"]["nation"])
-    @tank.user_id = current_user.id
+    if params["name"] == "" && params["nation"] == ""
+      flash[:message] = "Please fill in all fields"
+      erb :'tanks/new'
+    else
+      @tank = Tank.create(name: params["tank"]["name"], nation: params["tank"]["nation"])
+      @tank.user_id = current_user.id
+    end
     if @tank.save
       redirect to "/tanks/#{@tank.id}"
     else
@@ -20,7 +28,7 @@ class TanksController < ApplicationController
   end
 
   get '/tanks/:id' do
-    @tank = Tank.find(params[:id])
+    @tank = Tank.find(params['id'])
     erb :"/tanks/show"
   end
 
@@ -29,7 +37,7 @@ class TanksController < ApplicationController
     erb :'/tanks/edit'
   end
 
-  patch '/tanks/:id' do
+  post '/tanks/:id' do
     @tank = Tank.find(params['id'])
     @tank.name = params['name']
     @tank.nation = params['nation']
@@ -37,15 +45,11 @@ class TanksController < ApplicationController
     redirect to "/tanks/#{@tank.id}"
   end
 
-  delete '/tanks/:id/' do
+  delete '/tanks/:id' do
     @tank = Tank.find(params['id'])
     @tank.delete
+    redirect to '/tanks'
   end
+
+
 end
-
-
-
-# add user_id from current_user to the form / Tank.create in controller
-# if the tank saves, render tanks/show.erb for the new tank with flash saying "tank created"
-# if the tank doesn't save, render the form again with a flash message saying "couldnt create tank"
-# make a form / controller method / button to edit tank

@@ -1,29 +1,18 @@
 <h1>Update Tank</h1>
 
 <form action="/tanks/<%=@tank.id%>" method="POST">
-  <label>Name:</label>
-
-  <br></br>
-
-  <input type="text" name="tank[name]" id="tank_name" value="<%=@tank.name%>">
-
-  <br></br>
-
-  <label>Choose an existing tank:</label>
-
-  <br></br>
-
-  <%User.all.each do |pet|%>
-    <input type="checkbox" name="tank[user_id]" id="<%= user.id%>" value="<%=user.id%>" <%='checked' if @user.tanks.include?(tank)%>><%=user.name%></input>
-  <%end%>
+  <!-- <input type="hidden" name="_method" value="patch"> --> 
+  Tank Name: <input type="text" name="name" value="<%=@tank.name%>">
+  Tank Nation: <input type="text" name="nation" value="<%=@tank.nation%>">
+  <br>
 
   <input type="submit" value="Update Tank">
-
-
-  <h1>To delete tank click the button below</h1>
-
-  <form method="post" action="/tankss/<%=@tank.id%>/edit">
-    <input id="hidden" type="hidden" name="_method" value="delete">
-    <input id="delete" type="submit" value="delete">
-  <form>
 </form>
+
+
+<h1>To delete tank click the button below</h1>
+
+<form method="post" action="/tanks/<%=@tank.id%>">
+  <input id="hidden" type="hidden" name="_method" value="delete">
+  <input id="delete" type="submit" value="delete">
+<form>

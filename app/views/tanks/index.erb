@@ -1,3 +1,16 @@
   <h1>Welcome to your account <%=current_user.username %></h1>
+  <h2>Please create a new tank <a href='/tanks/new'>here</a></h2>
+<ul>
+  <% @tanks.each do |tank| %>
+    <li>
+      <label><%=tank.name.upcase%></label> <label><%= tank.nation.upcase%> <a href="/tanks/<%=tank.id%>/edit">edit</a></label>
 
-<%=@tanks.each.do |tank| %>
+    </li>
+    <%end%>
+</ul>
+
+
+
+
+
+<p> <a href="/logout">Logout:</a></p>
