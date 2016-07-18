@@ -6,9 +6,10 @@
 
 
 <form action="/tanks" method="post">
-  Name: <input type="text" name="tank[name]" id="tank_name">
-  Nation: <input type="text" name="tank[nation]" id="tank_nation">
+  Name: <input type="text" name="tank[name]" id="tank_name" required>
+  Nation: <input type="text" name="tank[nation]" id="tank_nation" required>
   <input type="submit" name="submit">
 
+<p> <a href="/logout">Logout:</a></p>
 
 </form>
