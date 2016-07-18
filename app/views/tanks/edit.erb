@@ -1,0 +1,28 @@
+<h1>Update Tank</h1>
+
+<form action="/tanks/<%=@tank.id%>" method="POST">
+  <label>Name:</label>
+
+  <br></br>
+
+  <input type="text" name="tank[name]" id="tank_name" value="<%=@tank.name%>">
+
+  <br></br>
+
+  <label>Choose an existing tank:</label>
+
+  <br></br>
+
+  <%User.all.each do |pet|%>
+    <input type="checkbox" name="tank[user_id]" id="<%= user.id%>" value="<%=user.id%>" <%='checked' if @tank.user == user %>><%=user.name%></input>
+  <%end%>
+
+  <br></br>
+
+  <label>and/or, create a new pet:</label>
+  <br></br>
+  <label>name:</label>
+    <input  type="text" name="pet[name]" id="pet_name"></input>
+  <br></br>
+  <input type="submit" value="Update Owner">
+</form>
