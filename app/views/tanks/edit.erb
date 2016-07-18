@@ -14,15 +14,16 @@
   <br></br>
 
   <%User.all.each do |pet|%>
-    <input type="checkbox" name="tank[user_id]" id="<%= user.id%>" value="<%=user.id%>" <%='checked' if @tank.user == user %>><%=user.name%></input>
+    <input type="checkbox" name="tank[user_id]" id="<%= user.id%>" value="<%=user.id%>" <%='checked' if @user.tanks.include?(tank)%>><%=user.name%></input>
   <%end%>
 
-  <br></br>
+  <input type="submit" value="Update Tank">
 
-  <label>and/or, create a new pet:</label>
-  <br></br>
-  <label>name:</label>
-    <input  type="text" name="pet[name]" id="pet_name"></input>
-  <br></br>
-  <input type="submit" value="Update Owner">
+
+  <h1>To delete tank click the button below</h1>
+
+  <form method="post" action="/tankss/<%=@tank.id%>/edit">
+    <input id="hidden" type="hidden" name="_method" value="delete">
+    <input id="delete" type="submit" value="delete">
+  <form>
 </form>

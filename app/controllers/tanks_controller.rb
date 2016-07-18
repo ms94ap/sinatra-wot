@@ -1,10 +1,7 @@
 class TanksController < ApplicationController
 
-  get '/tanks' do
-    @tank = Tank.all
-    erb :index
-
-  end
+  get '/tanks'
+  erb :index
 
 
   get '/tanks/new' do
@@ -15,7 +12,6 @@ class TanksController < ApplicationController
     @tank = Tank.create(name: params["tank"]["name"], nation: params["tank"]["nation"])
     @tank.user_id = current_user.id
     if @tank.save
-      flash[:message] = "Tank Created"
       redirect to "/tanks/#{@tank.id}"
     else
       flash[:message] = "Please enter all fields"
@@ -24,7 +20,7 @@ class TanksController < ApplicationController
   end
 
   get '/tanks/:id' do
-    @tank = Tank.find(params['id'])
+    @tank = Tank.find(params[:id])
     erb :"/tanks/show"
   end
 
@@ -33,7 +29,18 @@ class TanksController < ApplicationController
     erb :'/tanks/edit'
   end
 
+  patch '/tanks/:id' do
+    @tank = Tank.find(params['id'])
+    @tank.name = params['name']
+    @tank.nation = params['nation']
+    @tank.save
+    redirect to "/tanks/#{@tank.id}"
+  end
 
+  delete '/tanks/:id/' do
+    @tank = Tank.find(params['id'])
+    @tank.delete
+  end
 end
 
 
