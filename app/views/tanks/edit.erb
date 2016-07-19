@@ -1,18 +1,44 @@
-<h1>Update Tank</h1>
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+      <title>World of Tanks tracker</title>
 
-<form action="/tanks/<%=@tank.id%>" method="POST">
-  <!-- <input type="hidden" name="_method" value="patch"> --> 
-  Tank Name: <input type="text" name="name" value="<%=@tank.name%>">
-  Tank Nation: <input type="text" name="nation" value="<%=@tank.nation%>">
-  <br>
+      <!-- Bootstrap -->
+      <link href="css/bootstrap.min.css" rel="stylesheet">
 
-  <input type="submit" value="Update Tank">
-</form>
+      <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+      <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+      <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+    </head>
+    <body>
+      <h1>Update Tank</h1>
+
+      <form action="/tanks/<%=@tank.id%>" method="POST">
+        <!-- <input type="hidden" name="_method" value="patch"> -->
+        Tank Name: <input type="text" name="name" value="<%=@tank.name%>">
+        Tank Nation: <input type="text" name="nation" value="<%=@tank.nation%>">
+        <br>
+
+        <input type="submit" value="Update Tank">
+      </form>
 
 
-<h1>To delete tank click the button below</h1>
+      <h1>To delete tank click the button below</h1>
 
-<form method="post" action="/tanks/<%=@tank.id%>">
-  <input id="hidden" type="hidden" name="_method" value="delete">
-  <input id="delete" type="submit" value="delete">
-<form>
+      <form method="post" action="/tanks/<%=@tank.id%>">
+        <input id="hidden" type="hidden" name="_method" value="delete">
+        <button id="delete" type="submit" class="btn btn-danger" value="delete">Delete</button>
+      <form>
+      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+      <!-- Include all compiled plugins (below), or include individual files as needed -->
+      <script src="js/bootstrap.min.js"></script>
+    </body>
+  </html>
