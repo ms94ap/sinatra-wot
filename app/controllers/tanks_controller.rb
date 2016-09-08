@@ -1,14 +1,23 @@
 class TanksController < ApplicationController
 
   get '/tanks' do
-    @tanks = current_user.tanks
-    erb :'/tanks/index'
+    if logged_in?
+      @user = current_user
+      erb :'users/tanks'
+    else
+      redirect to "/login"
+    end
   end
 
 
 
   get '/tanks/new' do
-    erb :'/tanks/new'
+    if logged_in?
+      @user = current_user
+      erb :'/tanks/new'
+    else
+      redirect to "/login"
+    end
   end
 
   post '/tanks' do
@@ -50,6 +59,4 @@ class TanksController < ApplicationController
     @tank.delete
     redirect to '/tanks'
   end
-
-
 end
